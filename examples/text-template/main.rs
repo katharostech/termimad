@@ -54,25 +54,32 @@ fn main() -> Result<()> {
     expander
         .set("app-name", "MyApp")
         .set("app-version", "42.5.3");
-    expander.sub("module-rows")
+    expander
+        .sub("module-rows")
         .set("module-name", "lazy-regex")
         .set("module-key", "lrex")
         .set("module-description", "eases regexes");
-    expander.sub("module-rows")
+    expander
+        .sub("module-rows")
         .set("module-name", "termimad")
         .set("module-key", "tmd")
         .set_md("module-description", "do things on *terminal*");
-    expander.sub("formatted-items")
+    expander
+        .sub("formatted-items")
         .set("item-name", "3*5")
         .set("item-code", "187/12");
-    expander.sub("formatted-items")
+    expander
+        .sub("formatted-items")
         .set("item-name", "π")
         .set("item-code", "22/7");
-    expander.set_lines("some-function", r#"
+    expander.set_lines(
+        "some-function",
+        r#"
         fun test(a rational) {
             irate(a)
         }
-        "#);
+        "#,
+    );
     let text = expander.expand();
     let (width, _) = terminal_size();
     let fmt_text = FmtText::from_text(&skin, text, Some(width as usize));
